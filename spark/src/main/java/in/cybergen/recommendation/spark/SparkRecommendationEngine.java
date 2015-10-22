@@ -11,7 +11,7 @@ import org.apache.spark.SparkConf;
 public class SparkRecommendationEngine {
 
     public static void main(String[] args) {
-        SparkConf conf = new SparkConf().setAppName("SparkRecommendationEngine");
+        SparkConf conf = new SparkConf().setMaster("local").setAppName("SparkRecommendationEngine");
         JavaSparkContext sc = new JavaSparkContext(conf);
 
         // Load and parse the data
@@ -71,6 +71,5 @@ public class SparkRecommendationEngine {
         // Save and load model
         model.save(sc.sc(), "myModelPath");
         MatrixFactorizationModel sameModel = MatrixFactorizationModel.load(sc.sc(), "myModelPath");
-        model.predict(2,3);
     }
 }
